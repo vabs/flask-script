@@ -1,0 +1,16 @@
+.content {
+    height: 100px;
+    width: 500px;
+    background-color: red;
+    position:absolute;
+    -webkit-transition: all 1s;
+}
+
+.blocker{
+    display:none;
+    background-color: blue;
+    position: relative;
+    height: 100px;
+    width: 500px;
+    opacity: 0.2;
+}
