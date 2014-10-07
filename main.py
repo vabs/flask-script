@@ -8,10 +8,10 @@ import sys
 __author__ = 'vsomani'
 
 from flask import Flask
+
 from flask import render_template, request, jsonify
 import requests
 import pprint
-from github import Github, Label
 
 app = Flask(__name__)
 app.debug = True
