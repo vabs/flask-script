@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.debug = True
 
 manager = Manager(app)
-manager.run()
+#manager.run()
 
 @manager.command
 @manager.option('-h', '--hello', help="Say Hello!")
