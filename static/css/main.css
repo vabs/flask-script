@@ -1,0 +1,23 @@
+.div-listing{
+	width: 400px;
+	height: 400;
+	text-align: center;
+	font-size: 40px;
+	margin-left: 50px;
+	margin-top: 10px;
+	background: blueviolet;
+	vertical-align: middle;
+	padding-top: 50%;
+}
+
+.div-reviews{
+	width: 400px;
+	height: 400;
+	text-align: center;
+	font-size: 40px;
+	margin-left: 50px;
+	margin-top: 10px;
+	background: blueviolet;
+	vertical-align: middle;
+	padding-top: 50%;
+}
