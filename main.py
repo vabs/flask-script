@@ -107,10 +107,10 @@ def save_to_db():
 		print('error saving to db')
 		db.session.rollback()
 		traceback.print_exc(file=sys.stdout)
-		return jsonify({'status': 'failed'})}
+		return jsonify({'status': 'failed'})
 	finally:
 		db.session.close()
-		return jsonify({'status': 'failed'})}
+		return jsonify({'status': 'failed'})
 
 
 @app.errorhandler(404)
