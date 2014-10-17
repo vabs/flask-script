@@ -101,7 +101,6 @@ def save_to_db():
 						last_updated_date=tokens[token]['last_updated_at'])
 			db.session.add(payload)
 			db.session.commit()
-		tokens = {}
 		return jsonify({'status': 'ok'})
 	except:
 		print('error saving to db')
