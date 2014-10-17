@@ -94,7 +94,7 @@ def save_to_db():
 		global tokens
 		for token in tokens:
 			payload = StatsData(token_id=token,
-						location_name=tokens[token]['location_name'],
+						location_name=tokens[token]['name'],
 						listing_count=tokens[token]['listing'],
 						review_count=tokens[token]['review'],
 						start_date=tokens[token]['start_time'],
