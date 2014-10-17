@@ -4,6 +4,8 @@ import traceback
 import sys
 import datetime
 
+from model import StatsData, db
+
 app = Flask(__name__)
 app.debug = True
 
@@ -86,6 +88,31 @@ def get_values():
 		tokens = {}
 		traceback.print_exc(file=sys.stdout)
 	return jsonify(**tokens)
+
+
+@app.route('/savetodb')
+def save_to_db():
+	try:
+		global tokens
+		for token in tokens:
+			payload = StatsData(token_id=token,
+						location_name=tokens[token]['location_name'],
+						listing_count=tokens[token]['listing'],
+						review_count=tokens[token]['review'],
+						start_date=tokens[token]['start_time'],
+						last_updated_date=tokens[token]['last_updated_at'])
+			db.session.add(payload)
+			db.session.commit()
+		tokens = {}
+		return jsonify({'status': 'ok'})
+	except:
+		print('error saving to db')
+		db.session.rollback()
+		traceback.print_exc(file=sys.stdout)
+		return jsonify({'status': 'failed'})}
+	finally:
+		db.session.close()
+		return jsonify({'status': 'failed'})}
 
 
 @app.errorhandler(404)
