@@ -10,8 +10,6 @@ app = Flask(__name__)
 app.debug = True
 
 #vars used for page
-global listings
-global reviews
 global tokens
 
 @app.route('/')
