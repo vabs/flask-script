@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template
 import json
 import traceback
 import sys
+import datetime
 
 app = Flask(__name__)
 app.debug = True
@@ -36,7 +37,7 @@ def udpate_token():
 
 		raw_str = request.get_data().decode('utf-8')
 		json_obj = json.loads(raw_str)
-		tokens[json_obj['token']] = {'listing': 0, 'review': 0, 'name': json_obj['location_name']}
+		tokens[json_obj['token']] = {'listing': 0, 'review': 0, 'name': json_obj['location_name'], 'start_time': datetime.datetime.now(), 'last_updated_at': datetime.datetime.now()}
 		print('created token for location: ', json_obj['location_name'])
 		return jsonify({'status': 'ok'})
 	except:
@@ -57,16 +58,20 @@ def update_value():
 		if json_obj['listing']:
 			print('listing maybe ', json_obj['listing'])
 			tokens[json_obj['token']]['listing'] += 1
+			tokens[json_obj['token']]['last_updated_at'] = datetime.datetime.now()
 			print('done udpating listing')
 	except KeyError:
 		try:
 			if json_obj['review']:
-				print('listing maybe ', json_obj['review'])
+				print('review maybe ', json_obj['review'])
 				tokens[json_obj['token']]['review'] += 1
+				tokens[json_obj['token']]['last_updated_at'] = datetime.datetime.now()
 				print('done udpating reviews')
 		except KeyError:
 			print ('not proper request')
 			print(json_obj)
+			tokens[json_obj['token']] = {'listing': 0, 'review': 0, 'name': json_obj['location_name'], 'start_time': datetime.datetime.now(), 'last_updated_at': datetime.datetime.now()}
+		
 
 	return jsonify({'status': 'ok'})
 
