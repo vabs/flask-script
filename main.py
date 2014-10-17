@@ -35,8 +35,11 @@ def udpate_token():
 		raw_str = request.get_data().decode('utf-8')
 		json_obj = json.loads(raw_str)
 		tokens[json_obj['token']] = {'listing': 0, 'review': 0, 'name': json_obj['location_name']}
+		print('created token for location: ', json_obj['location_name'])
+		return jsonify({'status': 'ok'})
 	except:
 		print('error saving tokens')
+		return jsonify({'status': 'fail'})
 
 
 
@@ -50,16 +53,18 @@ def update_value():
 		if json_obj['listing']:
 			global tokens
 			tokens[json_obj['token']]['listing'] += 1
+			print('done udpating listing')
 	except KeyError:
 		try:
 			if json_obj['review']:
 				global tokens
 				tokens[json_obj['token']]['review'] += 1
+				print('done udpating reviews')
 		except KeyError:
 			print ('not proper request')
 			print(json_obj)
 
-	print('done udpating values')
+	return jsonify({'status': 'ok'})
 
 
 @app.route('/getValues')
