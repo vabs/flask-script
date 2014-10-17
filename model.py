@@ -13,6 +13,6 @@ class StatsData(db.Model):
 	token_id = db.Column(db.String)
 	location_name = db.Column(db.String)
 	listing_count = db.Column(db.BigInteger)
-	reviews_count = db.Column(db.BigInteger)
+	review_count = db.Column(db.BigInteger)
 	start_date = db.Column(db.Date)
 	last_updated_date = db.Column(db.Date)
