@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 import json
+import traceback
+import sys
 
 app = Flask(__name__)
 app.debug = True
@@ -75,6 +77,7 @@ def get_values():
 	except NameError:
 		print ("define for the first time!!")
 		tokens = {}
+		traceback.print_exc(file=sys.stdout)
 	return jsonify(**tokens)
 
 
