@@ -8,8 +8,18 @@
 <body>
 	<div class='container'>
 		<div class='row-fluid'>
-			<div class='col-md-6 col-lg-6 col-sm-12' id='listing'></div>
-			<div class='col-md-6 col-lg-6 col-sm-12' id='reviews'></div>
+			<div class='col-md-12 col-lg-12 col-sm-12'>
+				<table id='listing'>
+                    {% for token in tokens %}
+                        <tr>
+                            <td>{{ token.token_id }}</td>
+                            <td>{{ token.location_name }}</td>
+                            <td>{{ token.listing }}</td>
+                            <td>{{ token.review }}</td>
+                        </tr>
+                    {% endfor %}
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

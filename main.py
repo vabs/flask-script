@@ -7,24 +7,65 @@ app.debug = True
 #vars used for page
 global listings
 global reviews
+global tokens
 
 @app.route('/')
 def hello():
-	global listings
-	global reviews
+	global tokens
 	try:
-		listings
+		tokens
 	except NameError:
 		print ("well, it WASN'T defined after all!")
-		listings = {}
+		tokens = {}
 
+	return render_template('home.html', tokens=tokens)
+
+
+@app.route('/updatetoken', methods=['POST'])
+def udpate_token():
 	try:
-		reviews
-	except NameError:
-		print ("well, it WASN'T defined after all!")
-		reviews = {}
+		print('update tokens')
+		global tokens
+		try:
+			tokens
+		except NameError:
+			print ("define for the first time!!")
+			tokens = {}
 
-	return render_template('home.html', listings = listings, reviews=reviews)
+		raw_str = request.get_data().decode('utf-8')
+		json_obj = json.loads(raw_str)
+		tokens[json_obj['token']] = {'listing': 0, 'review': 0, 'name': json_obj['location_name']}
+	except:
+		print('error saving tokens')
+
+
+
+@app.route('/updatevalues', methods=['POST'])
+def update_value():
+	print('updating values')
+	raw_str = request.get_data().decode('utf-8')
+	json_obj = json.loads(raw_str)
+	print(json_obj)
+	try:
+		if json_obj['listing']:
+			global tokens
+			tokens[json_obj['token']]['listing'] += 1
+	except KeyError:
+		try:
+			if json_obj['review']:
+				global tokens
+				tokens[json_obj['token']]['review'] += 1
+		except KeyError:
+			print ('not proper request')
+			print(json_obj)
+
+	print('done udpating values')
+
+
+@app.route('/getValues')
+def get_values():
+	global tokens
+	return jsonify(**tokens)
 
 
 @app.route('/listings', methods=['GET', 'POST'])
