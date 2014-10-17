@@ -70,6 +70,11 @@ def update_value():
 @app.route('/getValues')
 def get_values():
 	global tokens
+	try:
+		tokens
+	except NameError:
+		print ("define for the first time!!")
+		tokens = {}
 	return jsonify(**tokens)
 
 
