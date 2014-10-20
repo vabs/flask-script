@@ -3,9 +3,9 @@ $(function(){
 	setInterval(function(){
 				getData();}, 
 			5000);
-	setInterval(function(){
-		saveData();
-	}, 300000);
+	// setInterval(function(){
+	// 	saveData();
+	// }, 300000);
 });
 
 
