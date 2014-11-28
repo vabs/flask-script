@@ -1,0 +1,17 @@
+body{
+    background-color: #086FA1;
+}
+
+#listingCount {
+    background-color: #FFA640;
+    font-size: 120px;
+    color: #FFBE73;
+    text-align: center;
+}
+
+#reviewsCount {
+    background-color: #BF7D30;
+    font-size: 120px;
+    color: #A65900;
+    text-align: center;
+}

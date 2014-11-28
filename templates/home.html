@@ -3,6 +3,7 @@
 	<title>Dashboard</title>
 	<link href='/static/css/bootstrap.css' rel='stylesheet' type='text/css'>
 	<link href='/static/css/main.css' rel='stylesheet' type='text/css'>
+    <link href='/static/css/dashboard.css' rel='stylesheet' type='text/css'>
 	<script type='text/javascript' src='/static/js/jquery.js'></script>
 	<script type='text/javascript' src='/static/js/main.js'></script>
 </head>
@@ -14,8 +15,22 @@
             <a class="navbar-brand visible-xs" href="/" title="SweetIQ Stats">SIQ Stats</a>
         </div>
 	</div>
-	<div class='container'>
-		<div class='row-fluid'>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6" id="listingCount">
+                <p>Listings</p>
+                <p>30</p>
+            </div>
+            <div class="col-xs-6" id="reviewsCount">
+                <p>Reviews</p>
+                <p>30</p>
+            </div>
+        </div>
+    </div>
+
+	<div class='container-fluid'>
+		<div class='row'>
 			<div class='col-md-12 col-lg-12 col-sm-12'>
 				<table id='listing' class='table table-striped'>
                     {% for token in tokens %}

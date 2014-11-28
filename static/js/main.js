@@ -1,11 +1,10 @@
 var g_listings, g_reviews;
 $(function(){
 	setInterval(function(){
-				getData();}, 
+				// getData();
+				updateCount();
+			}, 
 			5000);
-	// setInterval(function(){
-	// 	saveData();
-	// }, 300000);
 });
 
 
@@ -20,6 +19,12 @@ function getData () {
 					'</td><td>' + b['start_time'] + '</td><td>' + b['last_updated_at'] + '</td></tr>';
 			s_table.append(row);
 		}
+	});
+}
+
+function updateCount(){
+	$.get('getRL', function(data){
+		//$("#listingCount")
 	});
 }
 

@@ -11,15 +11,19 @@ app.debug = True
 
 #vars used for page
 global tokens
+global listing_count
+global reviews_count
 
 @app.route('/')
 def hello():
-	global tokens
+	global tokens, listing_count, reviews_count
 	try:
 		tokens
 	except NameError:
 		print ("well, it WASN'T defined after all!")
 		tokens = {}
+		listing_count = 0
+		reviews_count = 0
 
 	return render_template('home.html', tokens=tokens)
 
@@ -28,12 +32,14 @@ def hello():
 def udpate_token():
 	try:
 		print('update tokens')
-		global tokens
+		global tokens, listing_count, reviews_count
 		try:
 			tokens
 		except NameError:
 			print ("define for the first time!!")
 			tokens = {}
+			listing_count = 0
+			reviews_count = 0
 
 		raw_str = request.get_data().decode('utf-8')
 		json_obj = json.loads(raw_str)
@@ -88,6 +94,19 @@ def get_values():
 	return jsonify(**tokens)
 
 
+@app.route('/getRL')
+def get_data():
+	global review_count, listing_count
+	try:
+		review_count, listing_count
+	except NameError:
+		print ("define for the first time!")
+		review_count = 0
+		listing_count = 0
+	temp= {'reviews': review_count, 'listings': listing_count}
+	return jsonify(**temp)
+
+
 @app.route('/savetodb')
 def save_to_db():
 	try:
@@ -112,6 +131,11 @@ def save_to_db():
 		return jsonify({'status': 'failed'})
 
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
 @app.errorhandler(404)
 def handle_404(e):
 	return jsonify({'status': '404'})	
@@ -122,4 +146,5 @@ def handle_500(e):
 	return jsonify({'status': '500'})	
 
 if __name__ == "__main__":
-	app.run()	
+	app.debug = True
+	app.run()
