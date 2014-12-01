@@ -54,7 +54,7 @@ def udpate_token():
 
 @app.route('/updatevalues', methods=['POST'])
 def update_value():
-	global tokens
+	global tokens, listing_count, reviews_count
 	print('updating values')
 	raw_str = request.get_data().decode('utf-8')
 	json_obj = json.loads(raw_str)
@@ -64,6 +64,7 @@ def update_value():
 		if json_obj['listing']:
 			print('listing maybe ', json_obj['listing'])
 			tokens[json_obj['token']]['listing'] += 1
+			listing_count += 1
 			tokens[json_obj['token']]['last_updated_at'] = datetime.datetime.now()
 			print('done udpating listing')
 	except KeyError:
@@ -71,6 +72,7 @@ def update_value():
 			if json_obj['review']:
 				print('review maybe ', json_obj['review'])
 				tokens[json_obj['token']]['review'] += 1
+				reviews_count += 1
 				tokens[json_obj['token']]['last_updated_at'] = datetime.datetime.now()
 				print('done udpating reviews')
 		except KeyError:
