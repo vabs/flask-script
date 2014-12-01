@@ -1,7 +1,7 @@
 var g_listings, g_reviews;
 $(function(){
 	setInterval(function(){
-				// getData();
+				getData();
 				updateCount();
 			}, 
 			5000);
@@ -24,7 +24,8 @@ function getData () {
 
 function updateCount(){
 	$.get('getRL', function(data){
-		//$("#listingCount")
+		$("#lCount").html(data['listings']);
+		$("#rCount").html(data['reviews']);
 	});
 }
 
