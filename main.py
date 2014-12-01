@@ -79,6 +79,8 @@ def update_value():
 			print ('not proper request')
 			print(json_obj)
 			tokens[json_obj['token']] = {'listing': 0, 'review': 0, 'name': json_obj['location_name'], 'start_time': datetime.datetime.now(), 'last_updated_at': datetime.datetime.now()}
+		except NameError:
+			reviews_count = 0
 		
 
 	return jsonify({'status': 'ok'})
@@ -98,14 +100,14 @@ def get_values():
 
 @app.route('/getRL')
 def get_data():
-	global review_count, listing_count
+	global reviews_count, listing_count
 	try:
-		review_count, listing_count
+		reviews_count, listing_count
 	except NameError:
 		print ("define for the first time!")
-		review_count = 0
-		listing_count = 0
-	temp= {'reviews': review_count, 'listings': listing_count}
+		reviews_count = 0
+		reviews_count = 0
+	temp= {'reviews': reviews_count, 'listings': listing_count}
 	return jsonify(**temp)
 
 
