@@ -106,7 +106,7 @@ def get_data():
 	except NameError:
 		print ("define for the first time!")
 		reviews_count = 0
-		reviews_count = 0
+		listing_count = 0
 	temp= {'reviews': reviews_count, 'listings': listing_count}
 	return jsonify(**temp)
 
